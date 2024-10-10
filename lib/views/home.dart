@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:resepku/models/recipe.dart';
 import 'package:resepku/views/widgets/recipe_card.dart';
 import 'package:resepku/models/recipe.api.dart';
+import 'package:resepku/views/recipe_detail.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -41,22 +43,15 @@ class _HomePageState extends State<HomePage> {
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
-                    hintText: 'Cari resep...',
-                    prefixIcon: Icon(Icons.search),
+                    hintText: 'Search recipes...',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    filled: true,
-                    fillColor: Colors.white.withOpacity(0.2),
+                    prefixIcon: Icon(Icons.search),
                   ),
-                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),
-            Icon(Icons.restaurant_menu),
-            SizedBox(width: 10),
-            Text('Resep Masakan'),
           ],
         ),
       ),
@@ -65,11 +60,21 @@ class _HomePageState extends State<HomePage> {
           : ListView.builder(
               itemCount: _recipes.length,
               itemBuilder: (context, index) {
-                return RecipeCard(
-                  title: _recipes[index].name,
-                  cookTime: _recipes[index].totalTime,
-                  rating: _recipes[index].rating.toString(),
-                  thumbnailUrl: _recipes[index].images,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RecipeDetailPage(recipe: _recipes[index]),
+                      ),
+                    );
+                  },
+                  child: RecipeCard(
+                    title: _recipes[index].name,
+                    cookTime: _recipes[index].totalTime,
+                    rating: _recipes[index].rating.toString(),
+                    thumbnailUrl: _recipes[index].images,
+                  ),
                 );
               },
             ),
