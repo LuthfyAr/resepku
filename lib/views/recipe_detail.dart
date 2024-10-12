@@ -64,7 +64,7 @@ class RecipeDetailPage extends StatelessWidget {
                   SizedBox(height: 8),
                   ...recipe.ingredients.map((ingredient) => ListTile(
                         leading: Icon(Icons.check_box_outline_blank),
-                        title: Text(ingredient),
+                        title: Text(ingredient.wholeLine),
                       )),
                   SizedBox(height: 16),
                   // Instruksi

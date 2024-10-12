@@ -1,10 +1,11 @@
+import 'package:resepku/models/ingredient.dart';
 
 class Recipe {
   final String name;
   final String images;
   final double rating;
   final String totalTime;
-  final List<String> ingredients;
+  final List<Ingredient> ingredients;
   final List<String> instructions;
 
   Recipe({
@@ -17,11 +18,12 @@ class Recipe {
   });
 
   factory Recipe.fromJson(dynamic json) {
-    // Extract ingredients and instructions from the JSON
-    List<String> ingredientsList = (json['ingredientLines'] != null)
-        ? List<String>.from(json['ingredientLines'])
-        : [];
-        
+    List<Ingredient> ingredientsList =
+        (json['ingredientLines'] as List).map((e) {
+      return Ingredient.fromJson(e);
+    }).toList();
+
+    json = json['details'];
     List<String> instructionsList = (json['preparationSteps'] != null)
         ? List<String>.from(json['preparationSteps'])
         : [];
