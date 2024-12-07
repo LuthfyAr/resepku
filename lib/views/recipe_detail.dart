@@ -4,7 +4,7 @@ import 'package:resepku/models/recipe.dart';
 class RecipeDetailPage extends StatelessWidget {
   final Recipe recipe;
 
-  RecipeDetailPage({required this.recipe});
+  const RecipeDetailPage({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class RecipeDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Bahan-bahan
-                  Text(
+                  const Text(
                     'Bahan-bahan:',
                     style: TextStyle(
                       fontSize: 20,
@@ -63,7 +63,7 @@ class RecipeDetailPage extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: recipe.ingredients.map((ingredient) {
@@ -72,7 +72,7 @@ class RecipeDetailPage extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.fiber_manual_record,
                               size: 8,
                               color: Colors.black,
@@ -81,7 +81,7 @@ class RecipeDetailPage extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 ingredient.wholeLine,
-                                style: TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               ),
                             ),
                           ],
@@ -89,8 +89,8 @@ class RecipeDetailPage extends StatelessWidget {
                       );
                     }).toList(),
                   ),
-                  SizedBox(height: 16),                  
-                  SizedBox(height: 8),
+                  const SizedBox(height: 16),                  
+                  const SizedBox(height: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: recipe.instructions.asMap().entries.map((entry) {
@@ -106,7 +106,7 @@ class RecipeDetailPage extends StatelessWidget {
                               radius: 12,
                               child: Text(
                                 '$idx',
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ),
                             const SizedBox(width: 8),

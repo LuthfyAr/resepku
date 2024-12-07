@@ -4,8 +4,6 @@ import 'package:http/http.dart' as http;
 
 class RecipeApi {
   static const String _baseUrl = "yummly2.p.rapidapi.com";
-
-  // Fungsi untuk mengambil semua resep tanpa kategori
   static Future<List<Recipe>> getRecipe({String? category}) async {
     var queryParameters = {
       "limit": '24',
@@ -14,27 +12,36 @@ class RecipeApi {
 
     var uri = Uri.https(_baseUrl, "feeds/list", queryParameters);
 
-    final response = await http.get(uri, headers: {
-      'x-rapidapi-key': '889d38223emsh38d34d2328ed933p11264fjsn7d4912612a91',
-      'x-rapidapi-host': _baseUrl,
-    });
-    if (response.statusCode == 200) {
-      Map<String, dynamic> data = jsonDecode(response.body);
+    try {
+      final response = await http.get(uri, headers: {
+        'x-rapidapi-key': '889d38223emsh38d34d2328ed933p11264fjsn7d4912612a91',
+        'x-rapidapi-host': _baseUrl,
+      });
 
-      if (data['feed'] != null && data['feed'] is List) {
-        List temp = [];
-        for (var i in data['feed']) {
-          if (i['content'] != null) {
-            temp.add(i['content']);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(response.body);
+
+        if (data['feed'] != null && data['feed'] is List) {
+          List temp = [];
+          for (var i in data['feed']) {
+            if (i['content'] != null) {
+              temp.add(i['content']);
+            }
           }
+          return Recipe.recipesFromSnapshot(temp);
+        } else {
+          print('Feed is empty or null');
+          return [];
         }
-        return Recipe.recipesFromSnapshot(temp);
       } else {
-        print('Feed is empty or null');
-        return [];
+        
+        print('Failed to load recipes. Status code: ${response.statusCode}');
+        throw Exception('Failed to load recipes with status code ${response.statusCode}');
       }
-    } else {
-      throw Exception('Failed to load recipes');
+    } catch (e) {
+      
+      print('An error occurred: $e');
+      throw Exception('Error occurred while fetching recipes. Please try again later.');
     }
   }
 }

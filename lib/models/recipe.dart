@@ -7,7 +7,7 @@ class Recipe {
   final String totalTime;
   final List<Ingredient> ingredients;
   final List<String> instructions;
-  final String category; // Tambahkan kategori
+  final String category; 
 
   Recipe({
     required this.name,
@@ -16,11 +16,11 @@ class Recipe {
     required this.totalTime,
     required this.ingredients,
     required this.instructions,
-    required this.category, // Inisialisasi kategori
+    required this.category, 
   });
 
   factory Recipe.fromJson(dynamic json) {
-    // Ekstrak daftar ingredients
+    
     List<Ingredient> ingredientsList =
         (json['ingredientLines'] as List).map((e) {
       return Ingredient.fromJson(e);
@@ -28,12 +28,12 @@ class Recipe {
 
     json = json['details'];
 
-    // Ekstrak langkah-langkah persiapan
+    
     List<String> instructionsList = (json['preparationSteps'] != null)
         ? List<String>.from(json['preparationSteps'])
         : [];
 
-    // Ambil kategori dari JSON atau gunakan nilai default 'Uncategorized'
+    
     String category = json['category'] as String? ?? 'Uncategorized';
 
     return Recipe(
@@ -45,12 +45,10 @@ class Recipe {
       totalTime: json['totalTime'] as String? ?? 'Unknown',
       ingredients: ingredientsList,
       instructions: instructionsList,
-      category: category, // Inisialisasi kategori
+      category: category, 
     );
   }
 
-  // Tidak diperlukan getter 'imageUrl' karena sudah ada di konstruktor
-  // Tidak diperlukan getter 'category' karena sudah ditambahkan sebagai field
 
   static List<Recipe> recipesFromSnapshot(List snapshot) {
     return snapshot.map((data) {

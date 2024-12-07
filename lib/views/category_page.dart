@@ -94,10 +94,10 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
 
           // Judul dan ikon di kiri layar
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(
-              children: const [
+              children: [
                 Icon(Icons.restaurant_menu, size: 30, color: Colors.black),
                 SizedBox(width: 10),
                 Text(

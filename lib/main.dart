@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           onPrimary: Colors.white, // Warna teks pada elemen utama
       ),
     ),
-    home: HomePage(),
+    home: const HomePage(),
     );
   }
 }

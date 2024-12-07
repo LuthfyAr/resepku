@@ -3,7 +3,7 @@ import 'package:resepku/models/recipe.dart';
 import 'package:resepku/views/widgets/recipe_card.dart';
 import 'package:resepku/models/recipe.api.dart';
 import 'package:resepku/views/recipe_detail.dart';
-import 'package:resepku/views/category_page.dart'; // Import CategoryPage
+import 'package:resepku/views/category_page.dart'; 
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,9 +38,9 @@ class _HomePageState extends State<HomePage> {
         title: Row(
           children: [
             // Ikon dan teks ResepKU di sebelah kiri
-            Icon(Icons.restaurant_menu, size: 28, color: Colors.black),
-            SizedBox(width: 8),
-            Text(
+            const Icon(Icons.restaurant_menu, size: 28, color: Colors.black),
+            const SizedBox(width: 8),
+            const Text(
               'ResepKU',
               style: TextStyle(
                 fontSize: 22,
@@ -48,18 +48,18 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.black,
               ),
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             // Search Bar di tengah
             Expanded(
               child: _buildSearchBar(context),
             ),
             // Tombol kategori di sebelah kanan
             IconButton(
-              icon: Icon(Icons.category, color: Colors.black),
+              icon: const Icon(Icons.category, color: Colors.black),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CategoryPage()),
+                  MaterialPageRoute(builder: (context) => const CategoryPage()),
                 );
               },
             ),
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: false,
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: _recipes.length,
               itemBuilder: (context, index) {
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
           );
         },
         readOnly: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'Cari resep...',
           prefixIcon: Icon(Icons.search, color: Colors.black),
           border: InputBorder.none,
@@ -130,7 +130,7 @@ class RecipeSearchDelegate extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
@@ -142,7 +142,7 @@ class RecipeSearchDelegate extends SearchDelegate {
   List<Widget>? buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear, color: Colors.black),
+        icon: const Icon(Icons.clear, color: Colors.black),
         onPressed: () {
           query = '';
         },
@@ -153,7 +153,7 @@ class RecipeSearchDelegate extends SearchDelegate {
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back, color: Colors.black),
+      icon: const Icon(Icons.arrow_back, color: Colors.black),
       onPressed: () {
         close(context, null);
       },
